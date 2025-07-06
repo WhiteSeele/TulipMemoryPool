@@ -22,7 +22,7 @@ file(GLOB SOURCES "${SRC_DIR}/*.cpp")
 # 添加头文件目录
 include_directories(${INC_DIR})
 
-add_executable(main main.cpp)
+add_executable(main main.cpp ${SOURCES})
 
 # 创建单元测试可执行文件
 # add_executable(unit_test 
@@ -30,16 +30,16 @@ add_executable(main main.cpp)
 #     ${TEST_DIR}/UnitTest.cpp
 # )
 
-# # 创建性能测试可执行文件
-# add_executable(perf_test
-#     ${SOURCES}
-#     ${TEST_DIR}/PerformanceTest.cpp
-# )
+# 创建性能测试可执行文件
+add_executable(perf_test
+    ${SOURCES}
+    ${TEST_DIR}/PerformanceTest.cpp
+)
 
 # 链接pthread库
 target_link_libraries(main PRIVATE Threads::Threads)
 # target_link_libraries(unit_test PRIVATE Threads::Threads)
-# target_link_libraries(perf_test PRIVATE Threads::Threads)
+target_link_libraries(perf_test PRIVATE Threads::Threads)
 
 
 # # 添加测试命令
@@ -48,14 +48,14 @@ target_link_libraries(main PRIVATE Threads::Threads)
 #     DEPENDS unit_test
 # )
 
-# add_custom_target(perf
-#     COMMAND ./perf_test
-#     DEPENDS perf_test
-# )
+add_custom_target(perf
+    COMMAND ./perf_test
+    DEPENDS perf_test
+)
 
-# include(CTest)
-# enable_testing()
+include(CTest)
+enable_testing()
 
-# set(CPACK_PROJECT_NAME ${PROJECT_NAME})
-# set(CPACK_PROJECT_VERSION ${PROJECT_VERSION})
-# include(CPack)
+set(CPACK_PROJECT_NAME ${PROJECT_NAME})
+set(CPACK_PROJECT_VERSION ${PROJECT_VERSION})
+include(CPack)

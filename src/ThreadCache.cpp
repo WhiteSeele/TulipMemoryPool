@@ -1,5 +1,5 @@
 #include "../include/ThreadCache.h"
-#include "CentralCache.h"
+#include "../include/CentralCache.h"
 
 namespace Tulip_MemoryPool {
     void* ThreadCache::allocate(size_t size) {
@@ -87,10 +87,10 @@ namespace Tulip_MemoryPool {
         size_t size = (index + 1) * ALIGNMENT;
         size_t batchNum = getBatchNum(size);
         
-        void* start = CentralCache::getInstance().fecthRange(index, batchNum);
-        if(!start) return;
+        void* start = CentralCache::getInstance().fetchRange(index, batchNum);
+        if(!start) return nullptr;
 
-        _freeList[index] += batchNum;
+        _freeListSize[index] += batchNum;
 
         void* result = start;
         if(batchNum > 1) {
@@ -99,7 +99,7 @@ namespace Tulip_MemoryPool {
         return result;
     }
 
-    size_t getBatchNum(size_t size) {
+    size_t ThreadCache::getBatchNum(size_t size) {
         //baseline: 每次批量获取不超过 4KB 内存
         constexpr size_t MAX_BATCH_SIZE = 4 * 1024;
 

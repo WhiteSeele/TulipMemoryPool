@@ -1,5 +1,7 @@
+#pragma once
+
 #ifndef _TULIP_COMMON_H
-#define TULIP_COMMON_H
+#define _TULIP_COMMON_H
 
 #include <cstddef>
 #include <array>

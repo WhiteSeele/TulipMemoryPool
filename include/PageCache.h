@@ -1,3 +1,5 @@
+#pragma once
+
 #ifndef _TULIP_PAGECACHE_H
 #define _TULIP_PAGECACHE_H
 

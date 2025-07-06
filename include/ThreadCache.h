@@ -1,3 +1,5 @@
+#pragma once
+
 #ifndef _THREADCACHE_H
 #define _THREADCACHE_H
 

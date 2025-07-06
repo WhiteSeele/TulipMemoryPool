@@ -7,7 +7,7 @@ namespace Tulip_MemoryPool {
     //从 PageCache 获取 span 的大小(以页为单位)
     static const size_t SPAN_PAGES = 8;
 
-    void* CentralCache::fecthRange(size_t index, size_t batchNum) {
+    void* CentralCache::fetchRange(size_t index, size_t batchNum) {
         if(index >= FREE_LIST_SIZE || batchNum == 0)
             return nullptr;
 
